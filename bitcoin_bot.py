@@ -2,14 +2,23 @@ import ssl
 import json
 
 import websocket
+import bitstamp.client
+
+import credentials
 
 
-def sell():
-    pass
+def client():
+    return bitstamp.client.Trading(username=credentials.USERNAME, key=credentials.KEY, secret=credentials.SECRET)
+
+
+def sell(amount):
+    trading_client = client()
+    trading_client.buy_market_order(amount)
 
 
 def buy(amount):
-    pass
+    trading_client = client()
+    trading_client.sell_market_order(amount)
 
 
 def on_open(ws):
